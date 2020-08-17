@@ -37,16 +37,25 @@ function renderTodoApp() {
 
   for (let i = 0; i < todos.length; i++) {
     let todoItems = todos[i];
-     let stateOfBox = todoItems.completed ? "checked": ""
-     // create html markup for each object array
-        let todoMarkup = `
+    let stateOfBox = todoItems.completed ? "checked" : "";
+    // create html markup for each object array
+    let todoMarkup = `
     <li><input type="checkbox" ${stateOfBox}/>${todoItems.description}
     </li>
-    ` ;
-  // add markup to the inner html of the output element
-  todoList.innerHTML += todoMarkup;
-
+    `;
+    // add markup to the inner html of the output element
+    todoList.innerHTML += todoMarkup;
   }
+  let form = document.querySelector("#form");
+
+  form.onsubmit = (e) => {
+    e.preventDefault();
+    let li = document.createElement("li");
+    let input = document.querySelector("#input").value;
+    let inputmarkup = `<input type="checkbox" />${input}`;
+    li.innerHTML += inputmarkup;
+    todoList.appendChild(li);
+  };
 }
 
 renderTodoApp();
